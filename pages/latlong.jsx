@@ -81,6 +81,7 @@ const LatLongApp = () => {
                 />
             </div>
             <button
+                className="positive_action"
                 onClick={buttonHandler}
                 type="button"
             >
