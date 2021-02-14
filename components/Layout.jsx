@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import Copyright from './Copyright.jsx';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -13,16 +14,13 @@ const Layout = ({ children }) => (
         >
             {`
                 @import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
-                
                 :root {
                     --wates-teal: #00778A;
                     --body-text: #00161A;
                     --contrast-text: #FAFEFF;
                     --wates-lime: #7BC243;
                 }
-
                 /* REPSONSIVE LAYOUT AND WIDE PHONE SAFE-CHECK */
-
                 html {
                     padding: env(safe-area-inset);
                 }
@@ -48,9 +46,15 @@ const Layout = ({ children }) => (
                     padding-right: 10px;
                     margin: auto;
                 }
-
+                body {
+                    margin: 0;
+                    padding: 0;
+                    color: #111;
+                    font-family: 'Arial', sans-serif;
+                    font-size: 18px;
+                    background-color: #fff;
+                }
                 /* HEADER AND NAV BAR */
-
                 header {
                     border-bottom: 1px solid var(--contrast-text);
                     background-color: var(--wates-teal);
@@ -82,9 +86,7 @@ const Layout = ({ children }) => (
                     clear: both;
                     display: table;
                 }
-
                 /* LINKS */
-
                 a {
                     color: var(--wates-teal);
                     text-decoration: none;
@@ -93,34 +95,71 @@ const Layout = ({ children }) => (
                 a:hover {
                     text-decoration: underline !important;
                 }
-
                 /* LISTS */
-
                 li {
                     padding-bottom: 10px;
                 }
-
-                /* to be worked through for relevance */
-
-                main {
-                    margin-top: 10px;
+                /* INPUT AND OUTPUT */
+                .half {
+                    width: 49%;
+                    display: inline-block;
                 }
+                .half.right {
+                    text-align: right;
+                }
+                #inputField, #outputField{
+                    width: 95%;
+                    height: 310px;
+                    border: 1px solid var(--wates-lime);
+                    border-radius: 3px;
+                }
+                #inputField {
+                    float: left;
+                }
+                #outputField {
+                    float: right;
+                }
+                /* GENERIC COMMON ELEMENTS */
                 hr {
                     border: none;
                     background-color: var(--wates-teal);
                     height: 1px;
                     opacity: 0.7;
                 }
-                body {
-                    margin: 0;
-                    padding: 0;
-                    color: #111;
-                    font-family: 'Arial', sans-serif;
-                    font-size: 18px;
-                    background-color: #fff;
-                }
                 h1, h2, h3, h4, h5, h6 {
                     font-family: 'Mukta', sans-serif;
+                }
+                button {
+                    display: block;
+                    margin-bottom: 0.5rem;
+                    color: #fff;
+                    border-radius: 5px;
+                    border: none;
+                    background-color: #394c8f;
+                    cursor: pointer;
+                    transition: all 0.2s ease 0s;
+                    padding: 10px 25px;
+                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+                    font-size: 1.0rem;
+                }
+                button:hover, button:active {
+                    box-shadow: 0 0 5px 10px rgba(0, 120, 138, 0.3);
+                }
+                button.positive_action {
+                    background-color: green;
+                }
+                code {
+                    background-color: lightgrey;
+                    padding: 2px 4px 3px;
+                    border-radius: 4px;
+                    color: red;
+                }
+                .clearboth {
+                    clear: both;
+                }
+                /* TODO - CHECK WHAT IS REQUIRED */
+                main {
+                    margin-top: 10px;
                 }
                 h2 {
                     color: #394c8f;
@@ -142,32 +181,6 @@ const Layout = ({ children }) => (
                 h5 {
                     font-size: 1rem;
                 }
-                
-                button {
-                    display: block;
-                    margin-bottom: 0.5rem;
-                    color: #fff;
-                    border-radius: 5px;
-                    border: none;
-                    background-color: #394c8f;
-                    cursor: pointer;
-                    transition: all 0.2s ease 0s;
-                    padding: 10px 25px;
-                    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
-                    font-size: 1.0rem;
-                }
-                button:hover,
-                button:active {
-                    box-shadow: 0 0 5px 10px rgba(0, 120, 138, 0.3);
-                }
-                button.positive_action {
-                    background-color: green;
-                }
-
-
-
-
-
                 input {
                     border: 1px solid #d79022;
                     min-width: 20rem;
@@ -175,76 +188,13 @@ const Layout = ({ children }) => (
                     border-radius: 0.25rem;
                     padding: 0.5rem 0 0.5rem 0.2rem;
                     font-size: 1rem;
-                }
-                label, .circle {
-                    font-size: 1.5rem;
-                    display: inline-block;
-                    background-color: #394c8f;
-                    border-radius: 50%;
-                    width: 2.1rem;
-                    height: 2.1rem;
-                    text-align: center;
-                    color: white;
-                    margin-right: 0.75rem;
-                    position: relative;
-                }
-                
+                }                
                 footer {
                     text-align: center;
                     font-size: 0.8rem;
                     margin-top: 1rem;
                     padding: 3rem;
                     color: #888;
-                }
-                @media (max-width: 335px) {
-                    input {
-                        min-width: 15rem;
-                    }
-                }
-                @media (min-width: 336px) and (max-width: 365px) {
-                    input {
-                        min-width: 17rem !important;
-                    }
-                }
-                @media (min-width: 366px) and (max-width: 400px) {
-                    input {
-                        min-width: 18rem !important;
-                    }
-                }
-                .number-circle-list {
-                    list-style: none;
-                    padding-left: 1rem;
-                    counter-reset: circle-counter;
-                }
-                .number-circle-list--list-item {
-                    counter-increment: circle-counter;
-                    margin-bottom: 0.25rem;
-                }
-                .number-circle-list--list-item:before {
-                    content: counter(circle-counter);
-                    background-color: gray;
-                    width: 1.5rem;
-                    height: 1.5rem;
-                    border-radius: 50%;
-                    display: inline-block;
-                    font-size: 0.75rem;
-                    line-height: 1.5rem;
-                    color: $default-color;
-                    text-align: center;
-                    margin-right: 0.5rem;
-                    position: relative;
-                    top: -2px;
-                }
-                .number-circle-list--list-item:last-child {
-                    margin-bottom: 0;
-                }
-                .number-circle-list--list-item > .number-circle-list--list-item {
-                    margin-left: 0.25rem;
-                }
-                .number-circle-list--primary-color > .number-circle-list--list-item:before {
-                    background-color: #394C8F;
-                    color: white;
-                }
                 }
             `}
         </style>
@@ -265,7 +215,6 @@ const Layout = ({ children }) => (
             />
         </Head>
         <header>
-            {/* <ToastContainer align="right" position="top" /> */}
             <nav>
                 <Link href="/">
                     <a>

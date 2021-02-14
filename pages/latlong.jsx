@@ -64,15 +64,32 @@ const LatLongApp = () => {
             <div className="title">
                 <h1>Postcode to Lat/Lng Converter</h1>
             </div>
+            <p>This page takes a series of postcodes and returns latitude/longitude in the
+                format <code>&#123;lat:0.000,lng:0.000&#125;</code>.
+            </p>
+            <p>
+                The input expects each postcode to be on a separate line &mdash; you can simply
+                copy a series of postcodes from Excel and paste here, although it is recommended
+                you remove the final trailing (blank) line when you do so.
+            </p>
+            <p>Due to limitations of the API being used (postcodes.io) you should only search for
+                circa 20 postcodes at a time.
+            </p>
+            <p>If a postcode is not recognised, the response will be <code>**NOT FOUND**</code>. In
+                this instance the only suggestion I can make is to enter the postcode into Google
+                Maps, and use the lat/long from the resulting URL (thankfully this is not a common
+                issue).
+            </p>
+            <hr />
             <div className="half">
-                <p>Enter postcodes as a list (copy and paste from Excel) and hit PROCESS</p>
+                <p>Enter postcodes as a list and hit PROCESS</p>
                 <textarea
                     id="inputField"
                     onChange={inputHandler}
                     value={inputText}
                 />
             </div>
-            <div className="half">
+            <div className="half right">
                 <p>And lat/long will appear here</p>
                 <textarea
                     id="outputField"
@@ -80,6 +97,10 @@ const LatLongApp = () => {
                     value={outputText}
                 />
             </div>
+            <div
+                className="clearboth"
+                style={{ 'height': '10px' }}
+            />
             <button
                 className="positive_action"
                 onClick={buttonHandler}
