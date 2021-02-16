@@ -1,4 +1,3 @@
-/* eslint-disable max-lines */
 import Copyright from './Copyright.jsx';
 import Head from 'next/head';
 import Link from 'next/link';
