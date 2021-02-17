@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const INC = 1;
+const STATUS_OK = 200;
 
 const LatLongApp = () => {
     const [inputText, setInputText] = useState('');
@@ -11,51 +11,38 @@ const LatLongApp = () => {
         setInputText(value);
     };
 
-    const buttonHandler = (event) => {
+    const copyButtonHandler = (event) => {
+        // Stop default
+        event.preventDefault();
+        // Only act if there is data ...
+        if (outputText !== '') {
+            // Copy data to clipboard
+            const copyText = document.querySelector('#outputField');
+            copyText.select();
+            document.execCommand('copy');
+        }
+        event.target.blur();
+    };
+
+    const processButtonHandler = async (event) => {
         // Stop default
         event.preventDefault();
         // Gather data for request
         const dataIn = { 'postcodes': inputText.split('\n') };
-        // Get response
-        fetch('https://api.postcodes.io/postcodes', {
+        // Send request to server (internal API)
+        const res = await fetch('/api/latlong', {
             body: JSON.stringify(dataIn),
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             method: 'POST'
-        }).
-            then((response) => {
-                // The API call was successful!
-                if (response.ok) {
-                    // Get the json if ok
-                    return response.json();
-                }
-
-                // Else show the rejected promise
-                return Promise.reject(response);
-            }).
-            then((data) => {
-            // We have data; turn it into key/value pairs
-                const resultsObj = {};
-                for (let idx = 0; idx < data.result.length; idx += INC) {
-                    resultsObj[data.result[idx].query] = data.result[idx].result;
-                }
-                let out = '';
-                for (let idx = 0; idx < inputText.split('\n').length; idx += INC) {
-                    const res = resultsObj[inputText.split('\n')[idx]];
-                    if (res) {
-                        out = `${out}{lat:${res.latitude},lng:${res.longitude}}\n`;
-                    } else {
-                        out += '**NOT FOUND**\n';
-                    }
-                }
-                setOutputText(out);
-            }).
-            catch((err) => {
-            // There was an error
-                // eslint-disable-next-line no-console
-                console.warn('Something went wrong.', err);
-            });
+        });
+        // If successful use data, otherwise show an error message
+        if (res.status === STATUS_OK) {
+            const ret = await res.json();
+            setOutputText(ret.message);
+        } else {
+            setOutputText('ERROR');
+        }
+        // Blur the target
         event.target.blur();
     };
 
@@ -80,9 +67,13 @@ const LatLongApp = () => {
                 Maps, and use the lat/long from the resulting URL (thankfully this is not a common
                 issue).
             </p>
+            <p>Having generated a lat/lng list, you can use the <code>Copy</code> button to copy
+                those values to the clipboard &mdash; and then you can easily paste those values
+                into Excel.
+            </p>
             <hr />
             <div className="half">
-                <p>Enter postcodes as a list and hit PROCESS</p>
+                <p>Enter postcodes as a list and hit <code>Process</code> ...</p>
                 <textarea
                     id="inputField"
                     onChange={inputHandler}
@@ -90,7 +81,7 @@ const LatLongApp = () => {
                 />
             </div>
             <div className="half right">
-                <p>And lat/long will appear here</p>
+                <p>... and lat/long will appear here</p>
                 <textarea
                     id="outputField"
                     readOnly
@@ -101,13 +92,26 @@ const LatLongApp = () => {
                 className="clearboth"
                 style={{ 'height': '10px' }}
             />
-            <button
-                className="positive_action"
-                onClick={buttonHandler}
-                type="button"
-            >
-                Process
-            </button>
+            <div>
+                <button
+                    className="positive_action right"
+                    onClick={copyButtonHandler}
+                    type="button"
+                >
+                    Copy
+                </button>
+                <button
+                    className="positive_action"
+                    onClick={processButtonHandler}
+                    type="button"
+                >
+                    Process
+                </button>
+            </div>
+            <div
+                className="clearboth"
+                style={{ 'height': '10px' }}
+            />
         </div>
     );
 };

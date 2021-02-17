@@ -5,7 +5,7 @@ chain.
 
 Available functions:
 * "Lat/Long Lookup" - takes a series of postcodes (limit of circa 20 at a time) and returns their
-  latitude/longitude
+  latitude/longitude. This uses the API from [postcodes.io](https://postcodes.io/docs).
 
 Future development:
 * "Business Size" - takes a series of Companies House numbers, and return the company size based
