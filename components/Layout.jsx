@@ -106,11 +106,15 @@ const Layout = ({ children }) => (
                 .half.right {
                     text-align: right;
                 }
+                .right {
+                    float: right;
+                }
                 #inputField, #outputField{
                     width: 95%;
                     height: 310px;
                     border: 1px solid var(--wates-lime);
                     border-radius: 3px;
+                    resize: vertical;
                 }
                 #inputField {
                     float: left;
@@ -221,14 +225,14 @@ const Layout = ({ children }) => (
                     </a>
                 </Link>
                 <div>
-                    <Link href="/">
+                    <Link href="/companysize">
                         <a>
-                            (to come)
+                            Company Size Lookup
                         </a>
                     </Link>
                     <Link href="/latlong">
                         <a>
-                            Lat/Long Lookup
+                            Lat/Lng Lookup
                         </a>
                     </Link>
                 </div>

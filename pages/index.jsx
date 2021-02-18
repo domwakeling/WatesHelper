@@ -7,8 +7,8 @@ const HomePage = () => (
         <p>Functions can be access through the links below, or via links in the page header.</p>
         <ul>
             <li>
-                <Link href="/">
-                    <a>Companies House Lookup (to come)</a>
+                <Link href="/companysize">
+                    <a>Companies House Lookup</a>
                 </Link>
             </li>
             <li>

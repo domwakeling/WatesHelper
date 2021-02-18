@@ -1,14 +1,18 @@
 {
   "name": "wateshelper",
   "version": "1.0.0",
-  "description": "",
+  "description": "Helper functions example",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/domwakeling/WatesHelper"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
-  "author": "",
+  "author": "Dominic Wakeling",
   "license": "ISC",
   "dependencies": {
     "next": "^10.0.6",
